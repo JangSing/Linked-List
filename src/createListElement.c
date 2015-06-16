@@ -20,6 +20,8 @@ struct ListElement *createListElement(int value){
   
   NewNode = malloc(sizeof(struct ListElement));	
   NewNode -> value = value;
-  NewNode -> next = NULL;	
+  NewNode -> next = NULL;
+
+  return NewNode;
   
 }

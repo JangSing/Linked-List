@@ -1,8 +1,6 @@
 #ifndef createListElement_H
 #define createListElement_H
 
-
-
 struct ListElement{
 	struct ListElement *next;
 	int value;

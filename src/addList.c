@@ -11,18 +11,20 @@
 void addList(struct ListElement *NewEle,struct LinkedList *List ){
   
   if(List -> head == NULL){
-    // List -> tail = NewEle;
     List -> head = NewEle;
+    List -> tail = List -> head;
   }
   
   else {
-    
     List -> tail = List -> head;
+    
     
     while(List->tail-> next != NULL){
       List -> tail = List -> tail -> next;
     }
     
     List -> tail -> next = NewEle;
+
   }
+  
 }
