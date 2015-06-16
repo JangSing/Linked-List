@@ -11,13 +11,13 @@
 *
 */
 
-	struct LinkedList *createLinkedList(){
-		struct LinkedList *list;
-		list = malloc(sizeof(struct LinkedList));
+struct LinkedList *createLinkedList(){
+  struct LinkedList *list;
+  list = malloc(sizeof(struct LinkedList));
 		
-		list -> head = NULL;
-		list -> tail = NULL;
+  list -> head = NULL;
+  list -> tail = NULL;
 		
-		return list;
+  return list;
 		
-	}
+}

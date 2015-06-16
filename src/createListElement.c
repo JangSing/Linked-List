@@ -13,12 +13,13 @@
 *input:
 *   -int value
 */
-	struct ListElement *createListElement(int value){
-		
-		struct ListElement *NewNode;
-		
-		
-		NewNode = malloc(sizeof(struct ListElement));	
-		NewNode -> value = value;
-		NewNode -> next = NULL;	
-	}
+
+struct ListElement *createListElement(int value){
+  
+  struct ListElement *NewNode;
+  
+  NewNode = malloc(sizeof(struct ListElement));	
+  NewNode -> value = value;
+  NewNode -> next = NULL;	
+  
+}
