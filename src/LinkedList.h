@@ -5,13 +5,13 @@
 // **** Linkedist Function start here **** \\
 
 typedef struct ListElement_t{
-	struct ListElement_t *next;
-	int value;
+  struct ListElement_t *next;
+  int value;
 }ListElement;
 
 typedef struct {
-	ListElement *head;
-	ListElement *tail;
+  ListElement *head;
+  ListElement *tail;
   int length;
 }LinkedList;
 

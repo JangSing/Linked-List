@@ -29,7 +29,7 @@ void test_function_createLinkedList()
   LinkedList *ptr;
   ptr = createLinkedList();
 
-	TEST_ASSERT_NOT_NULL(ptr);
+  TEST_ASSERT_NOT_NULL(ptr);
   TEST_ASSERT_NULL(ptr->head);
   TEST_ASSERT_NULL(ptr->tail);
   TEST_ASSERT_EQUAL(0,ptr->length);
@@ -77,10 +77,10 @@ void test_Adding_element_to_LinkedList_using_function_addList_and_stackAdd()
   LinkedList *stackAddPtr;
 
   addListPtr  = createLinkedList();
-	stackAddPtr = createLinkedList();
+  stackAddPtr = createLinkedList();
 
   addList(createListElement(5),addListPtr);
-	stackAdd(stackAddPtr,createListElement(5));
+  stackAdd(stackAddPtr,createListElement(5));
 
   TEST_ASSERT_EQUAL(5,addListPtr->head->value);
   TEST_ASSERT_NULL(addListPtr->head->next);
@@ -288,13 +288,13 @@ void test_Five_Element_Added_to_the_List_using_addList()
   TEST_ASSERT_EQUAL(111 , ptr -> tail->value);
 
   addList(createListElement(123),ptr);
-  TEST_ASSERT_EQUAL(123 , ptr -> tail->value);
-	TEST_ASSERT_EQUAL(95 		, ptr -> head-> value );
-	TEST_ASSERT_EQUAL(100		, ptr -> head-> next-> value );
-	TEST_ASSERT_EQUAL(14		, ptr -> head-> next->next->value);
-	TEST_ASSERT_EQUAL(111		, ptr -> head-> next->next->next->value);
-	TEST_ASSERT_EQUAL(123		, ptr -> head-> next->next->next->next->value);
-	TEST_ASSERT_EQUAL(0			, ptr -> head-> next->next->next->next->next);
+  TEST_ASSERT_EQUAL(123   , ptr -> tail->value);
+  TEST_ASSERT_EQUAL(95 		, ptr -> head-> value );
+  TEST_ASSERT_EQUAL(100		, ptr -> head-> next-> value );
+  TEST_ASSERT_EQUAL(14		, ptr -> head-> next->next->value);
+  TEST_ASSERT_EQUAL(111		, ptr -> head-> next->next->next->value);
+  TEST_ASSERT_EQUAL(123		, ptr -> head-> next->next->next->next->value);
+  TEST_ASSERT_EQUAL(0     , ptr -> head-> next->next->next->next->next);
 }
 
  /**

@@ -10,7 +10,7 @@ LinkedList *createLinkedList(){
 
   list -> head   = NULL;
   list -> tail   = NULL;
-	list -> length = 0;
+  list -> length = 0;
 
   return list;
 }
