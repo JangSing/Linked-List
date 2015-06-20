@@ -1,20 +1,28 @@
 #ifndef LinkedList_H
 #define LinkedList_H
 
-struct LinkedList{
-	struct ListElement *head;
-	struct ListElement *tail;
-};
 
-struct ListElement{
-	struct ListElement *next;
+// **** Linkedist Function start here **** \\
+
+typedef struct ListElement_t{
+	struct ListElement_t *next;
 	int value;
-};
+}ListElement;
 
-struct ListElement *createListElement(int value);
+typedef struct {
+	ListElement *head;
+	ListElement *tail;
+  int length;
+}LinkedList;
 
-struct LinkedList *createLinkedList();
+ListElement *createListElement(int value);
 
-void addList(struct ListElement *NewEle,struct LinkedList *List );
+LinkedList *createLinkedList();
+
+void addList(ListElement *NewEle,LinkedList *List );
+
+void stackAdd(LinkedList *stack,ListElement *NewElem);
+
+ListElement *stackRemove(LinkedList *stack);
 
 #endif // LinkedList_H

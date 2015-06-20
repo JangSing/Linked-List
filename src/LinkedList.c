@@ -1,69 +1,92 @@
 #include "LinkedList.h"
 #include <malloc.h>
 #include <stdio.h>
+#include <assert.h>
 
+LinkedList *createLinkedList(){
+  LinkedList *list;
+  list = malloc(sizeof(LinkedList));
+  assert(list != NULL);
 
-/**
-*This function is to initialize the linked list.
-*Head and Tail has been declared.
-*Head and Tail are pointing to NULL;
-*
-*/
-struct LinkedList *createLinkedList(){
-  struct LinkedList *list;
-  list = malloc(sizeof(struct LinkedList));
-		
-  list -> head = NULL;
-  list -> tail = NULL;
-		
+  list -> head   = NULL;
+  list -> tail   = NULL;
+	list -> length = 0;
+
   return list;
-		
 }
 
+ListElement *createListElement(int value){
 
-/**
-*This function is to create an new Element.
-*Each element has the variable as below:
-*   -value(an integer)
-*   -next(a pointer)
-*
-*input:
-*   -int value
-*/
+  ListElement *NewNode= malloc(sizeof(ListElement));
+  assert(NewNode != NULL);
 
-struct ListElement *createListElement(int value){
-  
-  struct ListElement *NewNode;
-  
-  NewNode = malloc(sizeof(struct ListElement));	
   NewNode -> value = value;
   NewNode -> next = NULL;
 
   return NewNode;
-  
+
 }
 
+void addList(ListElement *NewEle,LinkedList *List ){
 
-/**
-*This function is to add an Element into the end of the Linked List.
-*/
-void addList(struct ListElement *NewEle,struct LinkedList *List ){
-  
-  if(List -> head == NULL){
+  if(List -> head == NULL && List -> tail == NULL){
     List -> head = NewEle;
     List -> tail = List -> head;
+    (List->length)++;
   }
-  
-  else {
-    List -> tail = List -> head;
-    
-    
-    while(List->tail-> next != NULL){
-      List -> tail = List -> tail -> next;
-    }
-    
-    List -> tail -> next = NewEle;
+  else if(List==NULL||NewEle==NULL){}
 
+  else {
+    List -> tail->next=NewEle;
+    List -> tail =List -> tail->next;
+    (List->length)++;
   }
-  
+
 }
+
+void stackAdd(LinkedList *stack,ListElement *NewElem){
+
+
+  if(stack->head==NULL && stack->tail==NULL){
+    stack->head=NewElem;
+    stack->tail=stack->head;
+    (stack->length)++;
+  }
+  else if(stack==NULL||NewElem==NULL){}
+
+
+  else{
+    NewElem->next=stack->head;
+    stack->head=NewElem;
+    (stack->length)++;
+  }
+}
+
+ListElement *stackRemove(LinkedList *stack){
+  ListElement *ptr;
+
+  if(stack->head==NULL && stack->tail==NULL){
+    return NULL;
+  }
+  else if(stack->head->next==NULL){
+    ptr=stack->head;
+    stack->head=NULL;
+    stack->tail=NULL;
+    (stack->length)--;
+  }
+  else{
+    ptr=stack->head;
+    stack->head=stack->head->next;
+    (stack->length)--;
+  }
+
+  ptr->next=NULL;
+  return ptr;
+
+
+}
+
+
+
+
+
