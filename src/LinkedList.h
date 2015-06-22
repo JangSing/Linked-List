@@ -1,9 +1,6 @@
 #ifndef LinkedList_H
 #define LinkedList_H
 
-
-// **** Linkedist Function start here **** \\
-
 typedef struct ListElement_t{
   struct ListElement_t *next;
   int value;
