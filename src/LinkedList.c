@@ -82,8 +82,33 @@ ListElement *stackRemove(LinkedList *stack){
 
   ptr->next=NULL;
   return ptr;
+}
 
+ListElement *RemoveLast(LinkedList *List){
+  ListElement *RemoveEle;
+  ListElement *travel;
 
+  if(List->head==NULL && List->tail==NULL){
+    return NULL;
+  }
+  else if(List->head->next==NULL){
+    RemoveEle=List->head;
+    List->head=NULL;
+    List->tail=NULL;
+    (List->length)--;
+  }
+  else{
+    travel=List->head;
+    while (travel->next!=NULL){
+      List->tail=travel;
+      travel=travel->next;
+    }
+    RemoveEle=travel;
+    List->tail->next=NULL;
+
+    (List->length)--;
+  }
+  return RemoveEle;
 }
 
 

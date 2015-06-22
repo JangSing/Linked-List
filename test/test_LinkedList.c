@@ -273,6 +273,7 @@ void test_stackAdd_and_addList_given_Element_equal_NULL_Should_do_nothing()
 void test_Five_Element_Added_to_the_List_using_addList()
 {
   LinkedList *ptr;
+  ListElement *RemoveEle;
   ptr = createLinkedList();
 
   addList(createListElement(95),ptr);
@@ -295,6 +296,8 @@ void test_Five_Element_Added_to_the_List_using_addList()
   TEST_ASSERT_EQUAL(111		, ptr -> head-> next->next->next->value);
   TEST_ASSERT_EQUAL(123		, ptr -> head-> next->next->next->next->value);
   TEST_ASSERT_EQUAL(0     , ptr -> head-> next->next->next->next->next);
+  TEST_ASSERT_EQUAL(5,ptr->length);
+
 }
 
  /**
@@ -344,8 +347,22 @@ void test_stackRemove_given_no_element_in_LinkedList_should_remove_nothing()
   TEST_ASSERT_NULL(ptr->tail);
 }
 
+// Testing function RemoveLast when there are no element in LinkedList.
+void test_RemoveLast_given_no_element_in_LinkedList_should_remove_nothing()
+{
+  LinkedList *ptr;
+  ListElement *RemovedEle;
+
+  ptr=createLinkedList();
+  RemovedEle=RemoveLast(ptr);
+
+  TEST_ASSERT_NULL(RemovedEle);
+  TEST_ASSERT_NULL(ptr->head);
+  TEST_ASSERT_NULL(ptr->tail);
+}
+
 /**
- * Testing function stackRemove when there are only one element in LinkedList.
+ * Testing function stackRemove and RemoveLast when there are only one element in LinkedList.
  *
  *                            ___________
  *    ptr---+-->head-------> |  value=1 |
@@ -373,6 +390,22 @@ void test_stackRemove_given_one_element_in_LinkedList_should_remove_head_Element
   ptr=createLinkedList();
   stackAdd(ptr,createListElement(1));
   RemovedEle=stackRemove(ptr);
+
+  TEST_ASSERT_EQUAL(1,RemovedEle->value);
+  TEST_ASSERT_NULL(RemovedEle->next);
+
+  TEST_ASSERT_NULL(ptr->head);
+  TEST_ASSERT_NULL(ptr->tail);
+  TEST_ASSERT_EQUAL(0,ptr->length);
+}
+void test_RemoveLast_given_one_element_in_LinkedList_should_remove_last_Element()
+{
+  LinkedList *ptr;
+  ListElement *RemovedEle;
+
+  ptr=createLinkedList();
+  stackAdd(ptr,createListElement(1));
+  RemovedEle=RemoveLast(ptr);
 
   TEST_ASSERT_EQUAL(1,RemovedEle->value);
   TEST_ASSERT_NULL(RemovedEle->next);
@@ -430,8 +463,29 @@ void test_stackRemove_given_three_element_in_LinkedList_should_remove_head_Eleme
 }
 
 
-//test whether after removing are able to stackAdd again
-void test_Add_and_Remove_Element_to_LinkedList()
+ /**
+ * Testing function RemoveLast when there are three element in LinkedList.
+ *
+ *
+ *                   _________      _________      _________
+ * ptr---+-->head-->| value=3|     | value=2|     | value=1|
+ *       |          |________|---->|________|---->|________|---->NULL
+ *       |                                            ^
+ *       |                                            |
+ *       +-->tail-------------------------------------+
+ *
+ *                            ||
+ *                            ||
+ *                           \ /
+ *                   _________     _________            _________
+ * ptr---+-->head-->| value=3|    | value=2|           | value=1|
+ *       |          |________|--->|________|---->NULL  |________|---->NULL
+ *       |                            ^
+ *       |                            |
+ *       +-->tail---------------------+
+ *
+ */
+void test_RemoveLast_given_three_element_in_LinkedList_should_remove_last_Element()
 {
   int i;
   LinkedList *ptr;
@@ -443,33 +497,36 @@ void test_Add_and_Remove_Element_to_LinkedList()
     stackAdd(ptr,createListElement(i));
   }
 
-  RemovedEle=stackRemove(ptr);
+  RemovedEle=RemoveLast(ptr);
 
-  stackAdd(ptr,createListElement(5));
-
-  TEST_ASSERT_EQUAL(3,RemovedEle->value);
+  TEST_ASSERT_EQUAL(1,RemovedEle->value);
   TEST_ASSERT_NULL(RemovedEle->next);
 
-  TEST_ASSERT_EQUAL(5,ptr->head->value);
+  TEST_ASSERT_EQUAL(3,ptr->head->value);
+  TEST_ASSERT_EQUAL_PTR(ptr->tail,ptr->head->next);
   TEST_ASSERT_EQUAL(2,ptr->head->next->value);
-  TEST_ASSERT_EQUAL(1,ptr->head->next->next->value);
-  TEST_ASSERT_NULL(ptr->head->next->next->next);
-  TEST_ASSERT_EQUAL(3,ptr->length);
+  TEST_ASSERT_EQUAL(2,ptr->tail->value);
+  TEST_ASSERT_NULL(ptr->tail->next);
+  TEST_ASSERT_EQUAL(2,ptr->length);
 }
 
 /**
- * Testing function stackAdd and addList in one single LinkedList
- *
- * ptr---+-->head--->5--->3--->1--->2--->4--->NULL
- *       |                               ^
- *       |                               |
- *       +-->tail------------------------+
- *
+ * This test will test all the function in one single linkedList
+ * Tested function:
+ *  -createListElement
+ *  -createLinkedList
+ *  -addList
+ *  -stackAdd
+ *  -stackRemove
+ *  -RemoveLast
  */
-void test_function_stackAdd_and_addList_in_one_single_LinkedList()
+void test_All_function_in_one_single_LinkedList()
 {
   int i;
   LinkedList *ptr;
+  ListElement *RemoveEnd;
+  ListElement *RemoveFirst;
+
   ptr=createLinkedList();
 
   addList(createListElement(1),ptr);
@@ -487,4 +544,26 @@ void test_function_stackAdd_and_addList_in_one_single_LinkedList()
 
   TEST_ASSERT_NULL(ptr->tail->next);
   TEST_ASSERT_EQUAL(5,ptr->length);
+
+  RemoveEnd=RemoveLast(ptr);
+
+  TEST_ASSERT_EQUAL(4,RemoveEnd->value);
+  TEST_ASSERT_EQUAL(2,ptr->tail->value);
+  TEST_ASSERT_NULL(ptr->tail->next);
+  TEST_ASSERT_EQUAL(4,ptr->length);
+
+  RemoveFirst=stackRemove(ptr);
+
+  TEST_ASSERT_EQUAL(5,RemoveFirst->value);
+  TEST_ASSERT_EQUAL(3,ptr->head->value);
+  TEST_ASSERT_EQUAL(3,ptr->length);
+
+  addList(createListElement(7),ptr);
+
+  TEST_ASSERT_EQUAL(3,ptr->head->value);
+  TEST_ASSERT_EQUAL(1,ptr->head->next->value);
+  TEST_ASSERT_EQUAL(2,ptr->head->next->next->value);
+  TEST_ASSERT_EQUAL(7,ptr->head->next->next->next->value);
+  TEST_ASSERT_NULL(ptr->head->next->next->next->next);
+  TEST_ASSERT_EQUAL(4,ptr->length);
 }

@@ -25,4 +25,6 @@ void stackAdd(LinkedList *stack,ListElement *NewElem);
 
 ListElement *stackRemove(LinkedList *stack);
 
+ListElement *RemoveLast(LinkedList *List);
+
 #endif // LinkedList_H
