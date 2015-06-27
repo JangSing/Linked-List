@@ -3,7 +3,7 @@
 
 typedef struct ListElement_t{
   struct ListElement_t *next;
-  int value;
+  void *value;
 }ListElement;
 
 typedef struct {
@@ -12,16 +12,25 @@ typedef struct {
   int length;
 }LinkedList;
 
-ListElement *createListElement(int value);
-
 LinkedList *createLinkedList();
+ListElement *createListElement(void *value);
 
-void addList(ListElement *NewEle,LinkedList *List );
+//*** Adding Element function start here ***\\
 
-void stackAdd(LinkedList *stack,ListElement *NewElem);
+void AddLast(ListElement *NewEle,LinkedList *List );
+void AddFirst(LinkedList *stack,ListElement *NewElem);
 
-ListElement *stackRemove(LinkedList *stack);
+//*** Removing Element function start here ***\\
 
+ListElement *RemoveFirst(LinkedList *stack);
 ListElement *RemoveLast(LinkedList *List);
+
+//*** Find Element function start here ***\\
+
+ListElement *listFind(LinkedList *list,void *value, int(*compare)(void *,void *));
+int intCompare(void *first, void *second);
+int strCompare(void *first, void *second);
+
+
 
 #endif // LinkedList_H
