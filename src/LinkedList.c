@@ -118,6 +118,9 @@ int intCompare(void *first, void *second){
   if(*ptr==*ptr1){
     return 0;
   }
+  else if(first==NULL||second==NULL){
+    return -1;
+  }
   else{
     return 1;
   }
@@ -131,6 +134,9 @@ int strCompare (void *first, void *second){
   if(strcmp(ptr,ptr1)==0){
     return 0;
   }
+  else if(first==NULL||second==NULL){
+    return -1;
+  }
   else{
     return 1;
   }
@@ -142,11 +148,19 @@ ListElement *listFind(LinkedList *list, void *value, int(*compare)(void *,void *
 
   ptr=list->head;
 
-  while (compare(ptr ->value , value)){
-    ptr =ptr->next;
+  if(list==NULL || value==NULL||(compare(ptr ->value , value)==-1)){
+    return NULL;
   }
-
-  return ptr;
+  else{
+    //if they the same then continue looping
+    while (compare(ptr ->value , value)){
+      ptr =ptr->next;
+      if(ptr==NULL){
+        return NULL;
+      }
+    }
+    return ptr;
+  }
 }
 
 

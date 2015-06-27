@@ -144,6 +144,7 @@ void test_Adding_two_element_to_LinkedList_using_function_AddLast()
     AddLast(createListElement(&value[i]),ptr);
   }
 
+  TEST_ASSERT_NOT_NULL(ptr);
   TEST_ASSERT_EQUAL(1,*((int *)(ptr->head->value)));
   TEST_ASSERT_EQUAL_PTR(ptr->tail,ptr->head->next);
   TEST_ASSERT_EQUAL(2,*((int *)(ptr->tail->value)));
@@ -175,6 +176,7 @@ void test_Adding_two_element_to_LinkedList_using_function_AddFirst()
     AddFirst(ptr,createListElement(&value[i]));
   }
 
+  TEST_ASSERT_NOT_NULL(ptr);
   TEST_ASSERT_EQUAL(2,*((int *)(ptr->head->value)));
   TEST_ASSERT_EQUAL_PTR(ptr->tail,ptr->head->next);
   TEST_ASSERT_EQUAL(1,*((int *)(ptr->tail->value)));
@@ -206,6 +208,7 @@ void test_Adding_three_element_to_LinkedList_using_function_addLast()
     AddLast(createListElement(&value[i]),ptr);
   }
 
+  TEST_ASSERT_NOT_NULL(ptr);
   TEST_ASSERT_EQUAL(1,*((int *)(ptr->head->value)));
   TEST_ASSERT_EQUAL(2,*((int *)(ptr->head->next->value)));
   TEST_ASSERT_EQUAL_PTR(ptr->tail,ptr->head->next->next);
@@ -239,6 +242,7 @@ void test_Adding_three_element_to_LinkedList_using_function_AddFirst()
     AddFirst(ptr,createListElement(&value[i]));
   }
 
+  TEST_ASSERT_NOT_NULL(ptr);
   TEST_ASSERT_EQUAL(3,*((int *)(ptr->head->value)));
   TEST_ASSERT_EQUAL(2,*((int *)(ptr->head->next->value)));
   TEST_ASSERT_EQUAL_PTR(ptr->tail,ptr->head->next->next);
@@ -274,6 +278,7 @@ void test_AddFirst_and_AddLast_given_Element_equal_NULL_Should_do_nothing()
   AddFirst(AddFirstPtr,NULL);
   AddFirst(AddFirstPtr,createListElement(&LastValue));
 
+  TEST_ASSERT_NOT_NULL(AddFirstPtr);
   TEST_ASSERT_EQUAL(3,*((int *)(AddFirstPtr->head->value)));
   TEST_ASSERT_EQUAL_PTR(AddFirstPtr->tail,AddFirstPtr->head->next);
   TEST_ASSERT_EQUAL(1,*((int *)(AddFirstPtr->tail->value)));
@@ -284,6 +289,7 @@ void test_AddFirst_and_AddLast_given_Element_equal_NULL_Should_do_nothing()
   AddLast(NULL,AddLastPtr);
   AddLast(createListElement(&LastValue),AddLastPtr);
 
+  TEST_ASSERT_NOT_NULL(AddLastPtr);
   TEST_ASSERT_EQUAL(1,*((int *)(AddLastPtr->head->value)));
   TEST_ASSERT_EQUAL_PTR(AddLastPtr->tail,AddLastPtr->head->next);
   TEST_ASSERT_EQUAL(3,*((int *)(AddLastPtr->tail->value)));
@@ -325,6 +331,7 @@ void test_Five_Element_Added_to_the_List_using_AddLast()
   AddLast(createListElement(&value[4]),ptr);
   TEST_ASSERT_EQUAL(123 , *((int *)(ptr -> tail->value)));
 
+  TEST_ASSERT_NOT_NULL(ptr);
   TEST_ASSERT_EQUAL(123   , *((int *)(ptr -> tail->value)));
   TEST_ASSERT_EQUAL(95 		, *((int *)(ptr -> head-> value )));
   TEST_ASSERT_EQUAL(100		, *((int *)(ptr -> head-> next-> value )));
@@ -359,6 +366,7 @@ void test_AddFirst_adding_five_element_into_LinkedList()
     AddFirst(ptr,createListElement(&value[i]));
   }
 
+  TEST_ASSERT_NOT_NULL(ptr);
   TEST_ASSERT_EQUAL(5,*((int *)(ptr->head->value)));
   TEST_ASSERT_EQUAL(4,*((int *)(ptr->head->next->value)));
   TEST_ASSERT_EQUAL(3,*((int *)(ptr->head->next->next->value)));
@@ -368,7 +376,7 @@ void test_AddFirst_adding_five_element_into_LinkedList()
   TEST_ASSERT_EQUAL(5,ptr->length);
 }
 
-// Testing function stackRemove when there are no element in LinkedList.
+// Testing function RemoveFirst when there are no element in LinkedList.
 void test_stackRemove_given_no_element_in_LinkedList_should_remove_nothing()
 {
   LinkedList *ptr;
@@ -428,6 +436,7 @@ void test_RemoveFirst_given_one_element_in_LinkedList_should_remove_head_Element
   AddFirst(ptr,createListElement(&value));
   RemovedEle=RemoveFirst(ptr);
 
+  TEST_ASSERT_NOT_NULL(ptr);
   TEST_ASSERT_EQUAL(1,*((int *)(RemovedEle->value)));
   TEST_ASSERT_NULL(RemovedEle->next);
 
@@ -446,6 +455,7 @@ void test_RemoveLast_given_one_element_in_LinkedList_should_remove_last_Element(
   AddFirst(ptr,createListElement(&value));
   RemovedEle=RemoveLast(ptr);
 
+  TEST_ASSERT_NOT_NULL(ptr);
   TEST_ASSERT_EQUAL(1,*((int *)(RemovedEle->value)));
   TEST_ASSERT_NULL(RemovedEle->next);
 
@@ -492,6 +502,8 @@ void test_RemoveFirst_given_three_element_in_LinkedList_should_return_removed_he
   for(i=0;i<3;i++){
     AddFirst(ptr,createListElement(&value[i]));
   }
+
+  TEST_ASSERT_NOT_NULL(ptr);
   TEST_ASSERT_EQUAL(3,ptr->length);
 
   RemovedEle=RemoveFirst(ptr);
@@ -540,6 +552,8 @@ void test_RemoveLast_given_three_element_in_LinkedList_should_return_removed_las
   for(i=0;i<3;i++){
     AddFirst(ptr,createListElement(&value[i]));
   }
+
+  TEST_ASSERT_NOT_NULL(ptr);
   TEST_ASSERT_EQUAL(3,ptr->length);
 
   RemovedEle=RemoveLast(ptr);
@@ -567,7 +581,6 @@ void test_RemoveLast_given_three_element_in_LinkedList_should_return_removed_las
  */
 void test_All_function_in_one_single_LinkedList()
 {
-  int i;
   int value[]={1,2,3,4,5,6};
 
   LinkedList *ptr;
@@ -582,6 +595,7 @@ void test_All_function_in_one_single_LinkedList()
   AddLast(createListElement(&value[3]),ptr);
   AddFirst(ptr,createListElement(&value[4]));
 
+  TEST_ASSERT_NOT_NULL(ptr);
   TEST_ASSERT_EQUAL(5,*((int *)(ptr->head->value)));
   TEST_ASSERT_EQUAL(3,*((int *)(ptr->head->next->value)));
   TEST_ASSERT_EQUAL(1,*((int *)(ptr->head->next->next->value)));
@@ -614,3 +628,60 @@ void test_All_function_in_one_single_LinkedList()
   TEST_ASSERT_NULL(ptr->head->next->next->next->next);
   TEST_ASSERT_EQUAL(4,ptr->length);
 }
+
+
+void test_findElement_integer()
+{
+	int myvalue4 =4;
+  int value[]={1,3,4,6,7};
+
+  LinkedList *ptr;
+  ListElement *ElemFind;
+
+  ptr=createLinkedList();
+
+  AddLast(createListElement(&value[0]),ptr);
+  AddLast(createListElement(&value[1]),ptr);
+  AddLast(createListElement(&value[2]),ptr);
+  AddLast(createListElement(&value[3]),ptr);
+  AddLast(createListElement(&value[4]),ptr);
+
+  ElemFind=NULL;
+  ElemFind=listFind(ptr,&myvalue4,intCompare);
+
+  TEST_ASSERT_NOT_NULL(ptr);
+  TEST_ASSERT_NOT_NULL(ElemFind);
+  TEST_ASSERT_NOT_NULL(ElemFind->value);
+  TEST_ASSERT_EQUAL(4,*(int *)(ElemFind->value));
+
+}
+
+void test_findElement_string()
+{
+	char *mystr4="four";
+  char *str[]={"one","three","four","six","seven"};
+
+  LinkedList *ptr;
+  ListElement *ElemFind;
+
+  ptr=createLinkedList();
+
+  AddLast(createListElement(str[0]),ptr);
+  AddLast(createListElement(str[1]),ptr);
+  AddLast(createListElement(str[2]),ptr);
+  AddLast(createListElement(str[3]),ptr);
+  AddLast(createListElement(str[4]),ptr);
+
+  ElemFind=NULL;
+  ElemFind=listFind(ptr,mystr4,strCompare);
+
+  TEST_ASSERT_NOT_NULL(ptr);
+  TEST_ASSERT_NOT_NULL(ElemFind);
+  TEST_ASSERT_NOT_NULL(ElemFind->value);
+  TEST_ASSERT_EQUAL("four",(char *)(ElemFind->value));
+}
+
+
+
+
+
